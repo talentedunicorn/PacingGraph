@@ -109,32 +109,64 @@
 				var headRow = $("#progress thead tr"); // Row to populate 
 				var start_month = start_date.getMonth(); 
 				var end_month = end_date.getMonth();
+				var start_year = start_date.getFullYear();
+				var end_year = end_date.getFullYear();
+				var diffYear = end_year - start_year;
 
+				//console.log("Year: "+ start_year + " - " + end_year + " = " + diffYear);
+				
 				// Clear
 				headRow.empty();
 
+				// Build HTML
 				headRow.html(function(){
 
-					// Going forward
-					if(end_month >= start_month) {
+					if(diffYear === 0) { // Same year
 						for(var i = start_month; i < end_month+1; i++){
 							$(this).append("<th>"+ months[i] + "</th>");
-						}						
-					}
+						}
+					} else { // Different year span
 
-					
-
-					// Looping back
-					if(end_month < start_month) {
-						
+						// To end of first year
 						for(var i = start_month; i < months.length; i++){
 							$(this).append("<th>"+ months[i] + "</th>");
 						}
 
-						for(var i = 0; i < end_month+1; i++){
-							$(this).append("<th>"+ months[i] + "</th>");
+						if (diffYear > 1) {
+							// Loop the extra years
+							for(var j = 0; j <= diffYear; j++) {
+								for(var k = 0; k < months.length; k++) {
+									$(this).append("<th>"+ months[k] + "</th>");
+								}
+							}	
 						}
+
+						// Last loop
+						for(var l = 0; l < end_month +1; l++){
+							$(this).append("<th>"+ months[l] + "</th>");
+						}
+
+						
 					}
+
+					// Going forward
+					// if(end_month >= start_month) {
+					// 	for(var i = start_month; i < end_month+1; i++){
+					// 		$(this).append("<th>"+ months[i] + "</th>");
+					// 	}						
+					// }
+
+					// Looping back
+					// if(end_month < start_month) {
+						
+					// 	for(var i = start_month; i < months.length; i++){
+					// 		$(this).append("<th>"+ months[i] + "</th>");
+					// 	}
+
+					// 	for(var i = 0; i < end_month+1; i++){
+					// 		$(this).append("<th>"+ months[i] + "</th>");
+					// 	}
+					// }
 
 				});
 			}
@@ -143,7 +175,7 @@
 			function build_indicator(completed) {
 				var indicator = $("#done");
 				completed = $.trim(completed); // clean input
-				console.log("Here " + completed );
+				//console.log("Here " + completed );
 
 				if ($.isNumeric(completed) && completed > 0){
 					indicator.addClass('done');
