@@ -13,15 +13,9 @@
 			margin: 10px auto;
 		}
 
-		.table-bordered th {
+		#progress thead th {
 			text-align: center;
 			color: #818181;
-		}
-
-		.table-bordered td {
-			/*height: 22px;*/
-			border-right: none;
-			border-left: none;
 		}
 
 		.done {
@@ -59,18 +53,8 @@
 						<thead>
 							<tr></tr> <!-- Insert values from JS -->
 						</thead>
-
+						<!-- Indicator -->
 						<caption id="done"></caption>
-						<!-- <tbody>
-							<tr>
-								<table id="indicator" style="width: 100%">
-									<tr>
-										<td id="done"></td>
-										<td></td>
-									</tr>
-								</table>
-							</tr>
-						</tbody> -->
 					</table>
 					</div>
 				</div>
@@ -93,8 +77,8 @@
 			$(".date").datepicker();
 
 			function run() {
-				var start_date = new Date(Date.parse($("#start_date").val())); // June 1, 2012
-				var end_date = new Date(Date.parse($("#end_date").val())); // July 1, 2013
+				var start_date = new Date(Date.parse($("#start_date").val())); // 
+				var end_date = new Date(Date.parse($("#end_date").val())); // 
 
 				build_months(start_date, end_date);
 				build_indicator($("#completed").val());
