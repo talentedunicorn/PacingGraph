@@ -24,7 +24,7 @@
 			border-left: none;
 		}
 
-		td.done {
+		.done {
 			background-color: #2BA6BB;
 		}
 	</style>
@@ -61,7 +61,7 @@
 							<tr>
 								<table id="indicator" style="width: 100%">
 									<tr>
-										<td id="done" class="done"></td>
+										<td id="done"></td>
 										<td></td>
 									</tr>
 								</table>
@@ -129,7 +129,7 @@
 				headRow.html(function(){
 
 					// Going forward
-					if(end_month > start_month) {
+					if(end_month >= start_month) {
 						for(var i = start_month; i < end_month+1; i++){
 							$(this).append("<th>"+ months[i] + "</th>");
 						}						
@@ -154,14 +154,15 @@
 
 			// Build indicator
 			function build_indicator(completed) {
-				var indicator = $("td#done");
-				console.log(completed);
+				var indicator = $("#done");
+				completed = $.trim(completed); // clean input
+				console.log("Here " + completed );
 
-				if (completed === 0 || completed === NaN){
-					indicator.css("width", "0%");
-				}
-				else {
+				if ($.isNumeric(completed) && completed > 0){
+					indicator.addClass('done');
 					indicator.css("width", completed+"%");
+				} else {
+					indicator.removeClass('done');
 				}
 			}
 
