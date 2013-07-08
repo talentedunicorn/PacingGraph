@@ -26,6 +26,8 @@
 
 		.done {
 			background-color: #2BA6BB;
+			height: 20px;
+			margin-bottom: 10px;
 		}
 	</style>
 </head>
@@ -57,7 +59,9 @@
 						<thead>
 							<tr></tr> <!-- Insert values from JS -->
 						</thead>
-						<tbody>
+
+						<caption id="done"></caption>
+						<!-- <tbody>
 							<tr>
 								<table id="indicator" style="width: 100%">
 									<tr>
@@ -66,7 +70,7 @@
 									</tr>
 								</table>
 							</tr>
-						</tbody>
+						</tbody> -->
 					</table>
 					</div>
 				</div>
@@ -113,7 +117,6 @@
 				var end_year = end_date.getFullYear();
 				var diffYear = end_year - start_year;
 
-				//console.log("Year: "+ start_year + " - " + end_year + " = " + diffYear);
 				
 				// Clear
 				headRow.empty();
@@ -134,7 +137,7 @@
 
 						if (diffYear > 1) {
 							// Loop the extra years
-							for(var j = 0; j <= diffYear; j++) {
+							for(var j = 0; j < diffYear - 1; j++) {
 								for(var k = 0; k < months.length; k++) {
 									$(this).append("<th>"+ months[k] + "</th>");
 								}
@@ -149,24 +152,6 @@
 						
 					}
 
-					// Going forward
-					// if(end_month >= start_month) {
-					// 	for(var i = start_month; i < end_month+1; i++){
-					// 		$(this).append("<th>"+ months[i] + "</th>");
-					// 	}						
-					// }
-
-					// Looping back
-					// if(end_month < start_month) {
-						
-					// 	for(var i = start_month; i < months.length; i++){
-					// 		$(this).append("<th>"+ months[i] + "</th>");
-					// 	}
-
-					// 	for(var i = 0; i < end_month+1; i++){
-					// 		$(this).append("<th>"+ months[i] + "</th>");
-					// 	}
-					// }
 
 				});
 			}
