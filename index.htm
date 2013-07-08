@@ -37,9 +37,9 @@
 					<div class="span4">
 						<h4>Controls</h4>
 
-						<input type="text" name="start_date" id="start_date" class="date" placeholder="Enter start date">	
-						<input type="text" name="end_date" id="end_date" class="date" placeholder="Enter end date">	
-						<input type="text" name="completed" id="completed" placeholder="Enter completed progress (%)">	
+						<input type="text" name="start_date" id="start_date" class="date control" placeholder="Enter start date">	
+						<input type="text" name="end_date" id="end_date" class="date control" placeholder="Enter end date">	
+						<input type="text" name="completed" id="completed" class="control" placeholder="Enter completed progress (%)">	
 						
 						<div class="row">
 							<div class="span4">
@@ -92,19 +92,6 @@
 				var start_date = new Date(Date.parse($("#start_date").val())); // June 1, 2012
 				var end_date = new Date(Date.parse($("#end_date").val())); // July 1, 2013
 
-				// var start_month = start_date.getMonth();
-				// var end_month = end_date.getMonth();
-
-								
-				/*for(var i = start_month; i < months.length; i++) {
-					console.log(months[i]); 
-				}
-
-				if(end_month < start_month) { 
-					for(var i = 0; i < end_month; i++) {
-						console.log(months[i]);
-					}
-				}*/
 				build_months(start_date, end_date);
 				build_indicator($("#completed").val());
 			}
@@ -167,23 +154,11 @@
 			}
 
 
-			/*// Interactivity
+			// Interactivity
 
-			$("#start_month").change(function(){
-				// Clear existing
-				$("#progress thead tr").empty();
-				
-				var start_month = $(this).val(); 
-
-				build_months(start_month);
+			$(".control").change(function(){
+				run();
 			});
-
-			$("#months_done").change(function(){
-				var completed = parseInt($(this).val(), 10);
-
-				build_indicator(completed);	
-
-			});*/
 
 		});
 	</script>
