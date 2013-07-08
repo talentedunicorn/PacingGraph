@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pacing</title>
+
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css">
+	
+	<style>
+		.container {
+			width: 100%;
+			margin: 10px auto;
+		}
+
+		.table-bordered th {
+			text-align: center;
+			color: #818181;
+		}
+
+		.table-bordered td {
+			/*height: 22px;*/
+			border-right: none;
+			border-left: none;
+		}
+
+		td.done {
+			background-color: #2BA6BB;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		
+			<div class="span12">
+				<div class="row">
+					<div class="span4">
+						<h4>Controls</h4>
+
+						<input type="text" name="start_month" id="start_month" placeholder="Enter start month (number)">	
+						<input type="text" name="months_done" id="months_done" placeholder="Enter completed months (number)">	
+						
+					</div>
+
+
+					<div class="span8">
+						<h4>Table Indicator</h4>
+						<hr>
+						<table id="progress" class="table table-condensed table-bordered">
+						<thead>
+							<tr></tr> <!-- Insert values from JS -->
+						</thead>
+						<tbody>
+							<tr>
+								<table id="indicator" style="width: 100%">
+									<tr>
+										<td id="done" class="done"></td>
+										<td></td>
+									</tr>
+								</table>
+							</tr>
+						</tbody>
+					</table>
+					</div>
+				</div>
+			</div>
+		
+		
+		
+	</div>
+	
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+	<!-- DateJs -->
+	<!--<script src="//cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>-->
+
+
+	<script>
+		$(function() {
+			var start_date = new Date("2012, 5, 1"); // June 1, 2012
+			var end_date = new Date("2013, 6, 1"); // July 1, 2013
+
+			//console.log(Date.compare(end_date, start_date));
+
+			// Inputs
+			// Month name array
+			var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+			// Start month
+			var start_month = 0;
+			// Completed months
+			var completed = 30;
+
+			
+			// Build month names
+			function build_months(start_month){
+				var headRow = $("#progress thead tr");
+				
+				headRow.html(function(){
+
+					for(var i = start_month; i < months.length; i++){
+						$(this).append("<th>"+ months[i] + "</th>");
+						//console.log(i);
+					}
+
+					// Starting from mid-point
+					if(start_month > 0) {
+						for(var i = 0; i < start_month; i++){
+							$(this).append("<th>"+ months[i] + "</th>");
+							//console.log(i);
+						}
+					}
+
+				});
+			}
+
+			// Build indicator
+			function build_indicator(completed) {
+				var indicator = $("td#done");
+				console.log(completed);
+
+				if (completed === 0 || completed === NaN){
+					// indicator.next("td").css("width", "100%");
+					indicator.css("width", "0%");
+					// console.log(indicator.next("td").css("width"));
+				}
+				else {
+					indicator.css("width", completed+"%");
+				}
+			}
+
+
+			build_months(start_month);
+			build_indicator(completed);
+
+
+			// Interactivity
+
+			$("#start_month").change(function(){
+				// Clear existing
+				$("#progress thead tr").empty();
+				
+				var start_month = $(this).val(); 
+
+				build_months(start_month);
+			});
+
+			$("#months_done").change(function(){
+				var completed = parseInt($(this).val(), 10);
+
+				build_indicator(completed);	
+
+			});
+
+		});
+	</script>
+</body>
+</html>
