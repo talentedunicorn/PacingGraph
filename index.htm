@@ -22,7 +22,10 @@
 			background-color: #2BA6BB;
 			height: 20px;
 			margin-bottom: 10px;
+			color: #E9E9E9;
+			font-weight: bold;
 		}
+
 	</style>
 </head>
 <body>
@@ -149,6 +152,7 @@
 				if ($.isNumeric(completed) && completed > 0){
 					indicator.addClass('done');
 					indicator.css("width", completed+"%");
+					indicator.text(completed + "%");
 				} else {
 					indicator.removeClass('done');
 				}
