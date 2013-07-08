@@ -92,8 +92,8 @@
 				var start_date = new Date(Date.parse($("#start_date").val())); // June 1, 2012
 				var end_date = new Date(Date.parse($("#end_date").val())); // July 1, 2013
 
-				var start_month = start_date.getMonth();
-				var end_month = end_date.getMonth();
+				// var start_month = start_date.getMonth();
+				// var end_month = end_date.getMonth();
 
 								
 				/*for(var i = start_month; i < months.length; i++) {
@@ -105,7 +105,7 @@
 						console.log(months[i]);
 					}
 				}*/
-				build_months(start_month, end_month);
+				build_months(start_date, end_date);
 				build_indicator($("#completed").val());
 			}
 			
@@ -114,17 +114,20 @@
 			});
 
 
-			// Months Array
-			var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
 			// Build month names
-			function build_months(start_month, end_month){
-				var headRow = $("#progress thead tr");
+			function build_months(start_date, end_date){
+				// Months Array
+				var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 				
+				var headRow = $("#progress thead tr"); // Row to populate 
+				var start_month = start_date.getMonth(); 
+				var end_month = end_date.getMonth();
+
 				// Clear
 				headRow.empty();
 
 				headRow.html(function(){
+
 					// Going forward
 					if(end_month > start_month) {
 						for(var i = start_month; i < end_month+1; i++){
