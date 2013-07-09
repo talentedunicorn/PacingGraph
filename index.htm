@@ -19,10 +19,10 @@
 		}
 
 		.done {
-			background-color: #2BA6BB;
+			background-color: rgb(255, 167, 10);
 			height: 20px;
 			margin-bottom: 10px;
-			color: #E9E9E9;
+			color: rgb(73, 73, 73);
 			font-weight: bold;
 		}
 
@@ -149,12 +149,14 @@
 				completed = $.trim(completed); // clean input
 				//console.log("Here " + completed );
 
-				if ($.isNumeric(completed) && completed > 0){
+				if ($.isNumeric(completed) && completed > 0 && completed <= 100){
 					indicator.addClass('done');
 					indicator.css("width", completed+"%");
 					indicator.text(completed + "%");
 				} else {
 					indicator.removeClass('done');
+					// remove text
+					indicator.empty();
 				}
 			}
 
